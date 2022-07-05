@@ -6,8 +6,17 @@ import FeedPage from './components/FeedPage';
 import {Routes,Route} from 'react-router-dom';
 import RequiredAuth from './components/RequiredAuth.js';
 import AlreadyAuth from './components/AlreadyAuth.js';
+import {useDispatch,useSelector} from 'react-redux';
+import React,{useEffect} from 'react';
+import axios from 'axios';
 
 function App() {
+useEffect(() => {
+  axios.get(`http://localhost:3001/refresh`)
+    .then((response) => {
+      console.log(response.data)
+    })
+},[])
   return (
     <div className="App">
       <Routes>

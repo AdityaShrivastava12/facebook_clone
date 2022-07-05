@@ -9,18 +9,17 @@ export const userSlice = createSlice({
       firstname: "",
       lastname:"",
       dob: "",
-      password: "",
       email: "",
       phone:"",
       age: "",
       gender: "",
-      about: ""
+      about: "",
+      accessToken: ''
     }
   },
   reducers:{
     loginR: (state,action) => {
       state.value = action.payload;
-      localStorage.setItem('userId', action.payload.id);
     }
   }
 })

@@ -6,11 +6,9 @@ const isLoggedInSlice = createSlice({
   reducers: {
     logIn : (state) => {
       state.value = true;
-      localStorage.setItem('loginStatus',true);
     },
     logOut : (state) => {
       state.value = false;
-      localStorage.setItem('loginStatus',false)
     }
   }
 })

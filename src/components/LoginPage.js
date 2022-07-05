@@ -15,7 +15,7 @@ function LoginPage(){
   const {email,password} = useSelector(state => state.loginForm.value);
   const {error,success} = useSelector(state => state.login.value);
   const user = useSelector(state => state.user.value);
-  const isLoggedIn = useSelector(state => state.loginStatus.value);
+  // const isLoggedIn = useSelector(state => state.loginStatus.value);
   let dispatch = useDispatch();
 
   async function clickHandler(e){
@@ -26,31 +26,23 @@ function LoginPage(){
       dispatch(loginError(response.error));
     }
     if(response.hasOwnProperty('success')){
-      dispatch(loginSuccess(response.success));
-      dispatch(loginR(response.user));
+      dispatch(loginSuccess('successfully logged in'));
+      dispatch(loginR(response.success));
+      let userId = response.success.id;
+      navigate(`/users/${userId}`);
       dispatch(logIn());
-
     }
 
-    // navigate(`/user/${userId}`);
-    // let user = await axios.get(`https://facebook-backend-aditya.herokuapp.com/users/${userId}`,{
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // })
-    // console.log(user.data);
-    // let userObj = user.data[0];
-    // dispatch(loginR(userObj));
   }
 
-  useEffect(() => {
-    if(isLoggedIn){
-      console.log(user);
-
-      let userId = user.id;
-      navigate(`/users/${userId}`, {replace: true});
-    }
-  },[isLoggedIn]);
+  // useEffect(() => {
+  //   if(isLoggedIn){
+  //     console.log(user);
+  //
+  //     let userId = user.id;
+  //     navigate(`/users/${userId}`, {replace: true});
+  //   }
+  // },[isLoggedIn]);
 
   function newAccountClickHandler(){
     dispatch(resetForm({firstname: '', lastname: '',email: '',password: '',dob: '',gender: ''}));

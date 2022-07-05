@@ -18,6 +18,7 @@ function FeedPage(){
   const dispatch = useDispatch();
   const feedState = useSelector((state) => state.feed.value);
   const formInput = useSelector(state => state.addPostInput.value);
+  const token = useSelector(state => state.user.value.accessToken)
   const {id} = useParams();
   useEffect(() => {
     axios.get(`http://localhost:3001/users/${id}`)
@@ -29,7 +30,11 @@ function FeedPage(){
   },[])
   const userState = useSelector(state => state.user.value);
   useEffect(() => {
-    axios.get(`http://localhost:3001/users/${id}/feed`)
+    axios.get(`http://localhost:3001/users/${id}/feed`,{
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    })
       .then((response) => {
         // console.log(response.data);
         dispatch(getFeed(response.data));
